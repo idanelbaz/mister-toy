@@ -1,7 +1,12 @@
 <template>
   <section class="app-header">
     <v-toolbar dark color="primary">
-      <v-toolbar-title style="cursor: pointer;"  @click="goHome" title="Home" class="white--text">Toys</v-toolbar-title>
+      <v-toolbar-title
+        style="cursor: pointer;"
+        @click="goHome"
+        title="Home"
+        class="white--text"
+      >Toys</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
@@ -10,7 +15,7 @@
       </v-btn>
 
       <v-btn icon>
-        <v-icon title="Profile" @click="goProfile">face</v-icon>
+        <v-icon title="Chart" @click="goProfile">insert_chart_outlined</v-icon>
       </v-btn>
       <v-btn icon>
         <v-icon title="About" @click="goAbout">all_inclusive</v-icon>
@@ -23,8 +28,7 @@
 </template>
 
 <script>
-import eventBus from '../eventBus.js'
-
+import eventBus from "../eventBus.js";
 
 export default {
   data: () => ({}),
@@ -36,22 +40,17 @@ export default {
       this.$router.push("/about");
     },
     goProfile() {
-      this.$router.push("/user");
+      this.$router.push("/grafs");
     },
-    addTodo(){ 
+    addTodo() {
       this.$router.push("/add");
     }
   },
   created() {
-        eventBus.$on('fireSwal', swalOpts => {
-            Swal.fire(
-                swalOpts.msg,
-                swalOpts.subMsg,
-                swalOpts.type,
-
-            )
-        })
-    },
+    eventBus.$on("fireSwal", swalOpts => {
+      Swal.fire(swalOpts.msg, swalOpts.subMsg, swalOpts.type);
+    });
+  }
 };
 </script>
 

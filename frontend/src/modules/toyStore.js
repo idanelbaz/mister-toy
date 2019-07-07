@@ -71,8 +71,40 @@ export default {
 
 
         },
+        getAllToys(state) {
+            return state.toys;
+        },
         getToy(state) {
             return state.currToy;
+        },
+        getToyNicePrice(state) {
+            let toysNice = state.toys.filter(toy => toy.type === 'Nice')
+            return toysNice.reduce((accumulator, toy) => {
+                let price = Number(toy.price)
+                return accumulator + price
+            }, 0)
+
+        },
+        getToySmartPrice(state) {
+            let toysSmart = state.toys.filter(toy => toy.type === 'Smart')
+            return toysSmart.reduce((accumulator, toy) => {
+                let price = Number(toy.price)
+                return accumulator + price
+            }, 0)
+        },
+        getToyFunnyPrice(state) {
+            let toysFunny = state.toys.filter(toy => toy.type === 'Funny')
+            return toysFunny.reduce((accumulator, toy) => {
+                let price = Number(toy.price)
+                return accumulator + price
+            }, 0)
+        },
+        getToyBabyPrice(state) {
+            let toysBaby = state.toys.filter(toy => toy.type === 'Baby')
+            return toysBaby.reduce((accumulator, toy) => {
+                let price = Number(toy.price)
+                return accumulator + price
+            }, 0)
         },
     },
 

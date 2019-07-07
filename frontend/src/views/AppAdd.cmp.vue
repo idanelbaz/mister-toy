@@ -2,9 +2,8 @@
   <section class="app-add">
     <h1 v-if="!isEdit">Edit The Toy</h1>
     <h1 v-else>Add A Toy</h1>
-
     <v-flex v-if="isImgOn" xs12 sm6 md3>
-      <v-text-field v-model="newToy.name" label="Toy name"></v-text-field>
+      <v-text-field  v-model="newToy.name" label="Toy name"></v-text-field>
     </v-flex>
     <v-flex v-if="isImgOn" xs12 sm6 md3>
       <v-text-field v-model="newToy.price" label="Price"></v-text-field>
@@ -25,6 +24,12 @@
 <script>
 import eventBus from "../eventBus.js";
 import toyService from "../services/toy-service.js";
+
+import Vue from "vue";
+import VeeValidate from "vee-validate";
+
+Vue.use(VeeValidate);
+
 export default {
   data: () => ({
     newToy: {

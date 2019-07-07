@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import toysHome from './views/ToyHome.vue'
 import appAdd from './views/AppAdd.cmp.vue'
 import toyDetails from './views/toyDetails.cmp.vue'
+import toyGrafs from './views/toyGrafs.cmp.vue'
 
 
 
@@ -13,6 +14,11 @@ export default new Router({
             path: '/',
             name: 'toysHome',
             component: toysHome
+        },
+        {
+            path: '/grafs',
+            name: 'toysGrafs',
+            component: toyGrafs
         },
         {
             path: '/add',
