@@ -38,11 +38,12 @@ function createToy(toyItem) {
             .then(res => res.data)
     } else {
         toyItem.time = moment().format("MMM Do YY");
-        toyItem.imgSrc = `https://robohash.org/${toyItem.name}.png`
+        if (!toyItem.img) toyItem.img = `https://robohash.org/${toyItem.name}.png`
         return axios.post(_getUrl(), toyItem)
-            .then(res => {
-                return res.data
-            })
+
+        .then(res => {
+            return res.data
+        })
     }
 }
 
