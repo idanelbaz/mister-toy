@@ -15,6 +15,8 @@
             <div>{{toy.type}}</div>
             <div>{{toy._id}}</div>
             <div>{{showTime}}</div>
+             <div v-if="toy.inStock">In Stock</div>
+             <div v-if="!toy.inStock">Not In Stock</div>
           </div>
         </v-card-title>
 

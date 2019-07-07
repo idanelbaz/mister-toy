@@ -11,6 +11,9 @@
     <v-flex v-if="isImgOn" xs12 sm6 md3 d-flex>
       <v-select v-model="newToy.type" :items="items" label="type"></v-select>
     </v-flex>
+    <v-flex v-if="isImgOn" xs12 sm6 md3 d-flex>
+      <v-select v-model="newToy.instock" :items="inStockItmes" label="in Stock"></v-select>
+    </v-flex>
     <label style="cursor: pointer;" v-if="isImgOn">
       Upload Toy Image
       <input @change="handleUploadImage" hidden type="file" />
@@ -36,10 +39,11 @@ export default {
       name: "",
       price: "",
       type: "",
-      inStock: true,
+      inStock: "",
       img: ""
     },
     isImgOn: true,
+    inStockItmes:[true,false],
     items: ["Nice", "Funny", "Smart", "Baby"],
     isEdit: true
   }),

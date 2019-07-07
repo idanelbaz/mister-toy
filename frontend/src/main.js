@@ -7,7 +7,7 @@ import store from './store.js'
 Vue.config.productionTip = false
 var SocialSharing = require('vue-social-sharing');
 Vue.use(SocialSharing);
-
+Vue.use(require('vue-moment'));
 import * as VueGoogleMaps from 'vue2-google-maps';
 
 

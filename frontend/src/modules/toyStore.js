@@ -8,7 +8,7 @@ export default {
         filterBy: {
             txt: '',
             type: '',
-            inStock: '',
+            inStock: null,
         },
         currToy: null,
     },

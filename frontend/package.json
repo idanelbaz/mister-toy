@@ -21,6 +21,7 @@
         "vee-validate": "^2.2.11",
         "vue": "^2.6.10",
         "vue-chartjs": "^3.4.2",
+        "vue-moment": "^4.0.0",
         "vue-router": "^3.0.3",
         "vue-social-sharing": "^2.4.5",
         "vue2-google-maps": "^0.10.7",
