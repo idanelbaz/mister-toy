@@ -45,7 +45,7 @@ export default {
   },
   computed: {
      showTime(){ 
-     return moment().startOf(this.currToy.time).fromNow(Date.now()); 
+     return moment().startOf(this.currToy.time).fromNow(); 
     }
   },
   components: {}
