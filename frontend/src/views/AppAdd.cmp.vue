@@ -54,7 +54,7 @@ export default {
         .then(() => {
           eventBus.$emit("fireSwal", {
             msg: "Good job",
-            subMsg: "Toy added",
+            subMsg: "Toy Saved",
             type: "success"
           });
         })

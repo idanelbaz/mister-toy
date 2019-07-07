@@ -1,7 +1,7 @@
 'use strict'
 
 import axios from "axios";
-const moment = require('moment')
+
 
 
 export default {
@@ -33,11 +33,11 @@ function getToyById(toyId) {
 
 function createToy(toyItem) {
     if (toyItem._id) {
-        toyItem.time = moment().format("MMM Do YY");
+        toyItem.time = Date.now();
         return axios.put(_getUrl(toyItem._id), toyItem)
             .then(res => res.data)
     } else {
-        toyItem.time = moment().format("MMM Do YY");
+        toyItem.time = Date.now();
         if (!toyItem.img) toyItem.img = `https://robohash.org/${toyItem.name}.png`
         return axios.post(_getUrl(), toyItem)
 

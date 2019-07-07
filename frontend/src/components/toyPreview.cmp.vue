@@ -9,6 +9,7 @@
             <div>
               <h3 class="headline mb-0">{{currToy.name}}</h3>
               <h3 class="headline mb-0">{{currToy.price}}$</h3>
+              <h3 class="headline mb-0">{{showTime}}</h3>
               <h3 v-if="currToy.inStock" class="headline mb-0">In Stock</h3>
               <h3 v-else class="headline mb-0">Not in Stock</h3>
             </div>
@@ -25,6 +26,7 @@
 </template>
 
 <script>
+const moment = require('moment')
 export default {
   props: ["currToy"],
 
@@ -41,7 +43,11 @@ export default {
       copy = {};
     }
   },
-  computed: {},
+  computed: {
+     showTime(){ 
+     return moment().startOf(this.currToy.time).fromNow(Date.now()); 
+    }
+  },
   components: {}
 };
 </script>

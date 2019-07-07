@@ -11,9 +11,10 @@
         <v-card-title primary-title>
           <div>
             <h3 class="headline mb-0">{{toy.name}}</h3>
-            <div>{{toy.price}}</div>
+            <div>{{toy.price}}$</div>
             <div>{{toy.type}}</div>
             <div>{{toy._id}}</div>
+            <div>{{showTime}}</div>
           </div>
         </v-card-title>
 
@@ -28,6 +29,8 @@
 <script>
 import eventBus from "../eventBus.js";
 import toyService from "../services/toy-service.js";
+const moment = require('moment')
+
 
 export default {
   data: () => ({
@@ -41,6 +44,11 @@ export default {
       });
   },
   methods: {
+  }, 
+  computed: { 
+    showTime(){ 
+     return moment().startOf(this.toy.time).fromNow(Date.now()); 
+    }
   }
 };
 </script>
