@@ -3,13 +3,15 @@ import userService from '../services/user-service.js'
 
 export default {
     state: {
-        users: null,
-        user: userService.query()
+        user: userService.getLoggedinUser()
     },
     mutations: {
-        saveUserChanges(state, payload) {
-            userService.editUserDet(payload.fullName, payload.bgColor, payload.color)
-        }
+        // saveUserChanges(state, payload) {
+        //     userService.editUserDet(payload.fullName, payload.bgColor, payload.color)
+        // },
+        // updateUser(state,details) { 
+
+        // }
     },
     getters: {
         getUserName(state) {

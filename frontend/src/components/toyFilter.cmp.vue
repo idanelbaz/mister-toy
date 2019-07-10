@@ -1,5 +1,13 @@
 <template>
   <section style="display: flex;justify-content: space-evenly;" class="toy-filter">
+          <v-btn v-if="currUserAdmin"  icon>
+        <v-icon title="Add toy" @click="addTodo">add</v-icon>
+        Add Toy
+      </v-btn>
+            <v-btn @click="logOut"  icon>
+        <v-icon title="LogOut" >all_out</v-icon>
+        LogOut
+      </v-btn>
     <v-flex style="display: flex;" xs12 sm6 md3>
       <v-text-field
         type="text"
@@ -22,6 +30,8 @@
 </template>
 
 <script>
+import userService from "../services/user-service.js"
+
 export default {
   data() {
     return {
@@ -39,8 +49,26 @@ export default {
     filterToys() {
       var copy = JSON.parse(JSON.stringify(this.filterBy))
       this.$emit("filterData", copy);
+    },
+        addTodo() {
+      this.$router.push("/add");
+    },
+     logOut(){ 
+     userService.logOut()
+     .then(()=> { 
+       this.$store.state.user = '';
+       this.$router.push("/");
+     })
     }
   },
-  components: {}
+  components: {},
+  computed: { 
+    currUserAdmin() {
+      var user = userService.getLoggedinUser();
+      if (!user) return '';
+      if(user[0].isAdmin) return true
+      return false
+    }
+  }
 };
 </script>

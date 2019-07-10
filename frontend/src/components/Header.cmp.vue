@@ -20,21 +20,21 @@
       <v-btn icon>
         <v-icon title="About" @click="goAbout">all_inclusive</v-icon>
       </v-btn>
-      <v-btn icon>
-        <v-icon title="Add toy" @click="addTodo">add</v-icon>
-      </v-btn>
     </v-toolbar>
   </section>
 </template>
 
 <script>
 import eventBus from "../eventBus.js";
+import userService from "../services/user-service.js"
 
 export default {
-  data: () => ({}),
+  data: () => ({
+    user: '',
+  }),
   methods: {
     goHome() {
-      this.$router.push("/");
+      this.$router.push("/home");
     },
     goAbout() {
       this.$router.push("/about");
@@ -42,15 +42,18 @@ export default {
     goProfile() {
       this.$router.push("/grafs");
     },
-    addTodo() {
-      this.$router.push("/add");
-    }
+
   },
   created() {
     eventBus.$on("fireSwal", swalOpts => {
       Swal.fire(swalOpts.msg, swalOpts.subMsg, swalOpts.type);
     });
+    
+  }, 
+  computed: { 
+
   }
+  
 };
 </script>
 

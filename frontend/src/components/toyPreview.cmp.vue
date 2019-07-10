@@ -3,7 +3,7 @@
     <v-layout style="margin: 20px;">
       <v-flex xs12 sm6 offset-sm3 style="max-width: 50rem;">
         <v-card>
-          <v-img style="padding: 100px;" :src="currToy.img" aspect-ratio="2.75"></v-img>
+          <v-img @click="goToDetails" style="padding: 100px;" :src="currToy.img" aspect-ratio="2.75"></v-img>
 
           <v-card-title primary-title>
             <div>
@@ -15,9 +15,9 @@
             </div>
           </v-card-title>
           <v-card-actions>
-            <v-btn flat color="orange" @click="goToEdit">Edit</v-btn>
-            <v-btn flat color="orange" @click="deleteToy">Delete</v-btn>
-            <v-btn flat color="orange" @click="goToDetails">Details</v-btn>
+            <v-btn v-if="currUserAdmin" flat color="orange" @click="goToEdit">Edit</v-btn>
+            <v-btn v-if="currUserAdmin" flat color="orange" @click="deleteToy">Delete</v-btn>
+            <v-btn  flat color="orange" @click="goToDetails">Details</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -27,6 +27,7 @@
 
 <script>
 const moment = require('moment')
+import userService from '../services/user-service.js'
 export default {
   props: ["currToy"],
 
@@ -46,6 +47,12 @@ export default {
   computed: {
      showTime(){ 
      return moment().startOf(this.currToy.time).fromNow(); 
+    },
+    currUserAdmin() {
+      var user = userService.getLoggedinUser();
+      if(!user) return false
+      if(user[0].isAdmin) return true
+      return false
     }
   },
   components: {}

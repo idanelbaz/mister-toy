@@ -80,7 +80,7 @@ export default {
         price: "",
         type: ""
       };
-      this.$router.push(`/`);
+      this.$router.push(`/home`);
     },
     handleUploadImage(ev) {
       this.isImgOn = false;
@@ -99,6 +99,7 @@ export default {
         .then(res => {
           this.newToy.img = res.url;
           console.log(res);
+          console.log(res.url)
           this.isImgOn = true;
           return res;
         })

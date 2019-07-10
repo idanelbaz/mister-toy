@@ -25,12 +25,14 @@
       </v-card>
     </v-flex>
   </v-layout>
+  <app-chat :currToy="toy"></app-chat>
   </section>
 </template>
 
 <script>
 import eventBus from "../eventBus.js";
 import toyService from "../services/toy-service.js";
+import appChat from "../components/appChat.cmp"
 const moment = require('moment')
 
 
@@ -51,6 +53,9 @@ export default {
     showTime(){ 
      return moment().startOf(this.toy.time).fromNow(); 
     }
+  },
+  components: { 
+    appChat,
   }
 };
 </script>

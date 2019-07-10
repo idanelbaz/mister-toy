@@ -1,8 +1,6 @@
 'use strict'
 
-import axios from "axios";
-
-const moment = require('moment')
+import httpService from './http.service';
 
 
 export default {
@@ -15,32 +13,27 @@ export default {
 
 
 function query() {
-    return axios.get(_getUrl())
-        .then(res => res.data)
+    return httpService.get(_getUrl())
 }
 
 
 function deleteToy(toyId) {
-    return axios.delete(_getUrl(toyId))
-        .then(res => res.data)
+    return httpService.delete(_getUrl(toyId))
 }
 
 
 function getToyById(toyId) {
-    return axios.get(_getUrl(toyId))
-        .then(res => res.data)
+    return httpService.get(_getUrl(toyId))
 }
-
 
 function createToy(toyItem) {
     if (toyItem._id) {
-        toyItem.time = moment().format("MMM Do YY");
-        return axios.put(_getUrl(toyItem._id), toyItem)
-            .then(res => res.data)
+        toyItem.time = new Date();
+        return httpService.put(_getUrl(toyItem._id), toyItem)
     } else {
-        toyItem.time = moment().format("MMM Do YY");
+        toyItem.time = new Date();
         if (!toyItem.img) toyItem.img = `https://robohash.org/${toyItem.name}.png`
-        return axios.post(_getUrl(), toyItem)
+        return httpService.post(_getUrl(), toyItem)
 
         .then(res => {
             return res.data
@@ -53,9 +46,5 @@ function createToy(toyItem) {
 
 
 function _getUrl(id = '') {
-
-    return (process.env.NODE_ENV !== 'development') ?
-        `/api/toy/${id}` :
-        `//localhost:3000/api/toy/${id}`
-
+    return `toy/${id}`
 }

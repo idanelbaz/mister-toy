@@ -4,6 +4,8 @@ import toysHome from './views/ToyHome.vue'
 import appAdd from './views/AppAdd.cmp.vue'
 import toyDetails from './views/toyDetails.cmp.vue'
 import toyGrafs from './views/toyGrafs.cmp.vue'
+import appLogin from './views/login.cmp.vue'
+import appSignup from './views/signup.cmp.vue'
 
 
 
@@ -11,9 +13,19 @@ Vue.use(Router)
 
 export default new Router({
     routes: [{
-            path: '/',
+            path: '/home',
             name: 'toysHome',
             component: toysHome
+        },
+        {
+            path: '/',
+            name: 'appLogin',
+            component: appLogin
+        },
+        {
+            path: '/signup',
+            name: 'appsignup',
+            component: appSignup
         },
         {
             path: '/grafs',
