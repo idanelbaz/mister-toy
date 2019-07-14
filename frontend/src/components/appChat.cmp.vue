@@ -7,13 +7,7 @@
       <li v-for="messege in messages" :key="messege.id">{{messege}}</li>
     </ul>
     <form @submit.prevent="sendMsg">
-      <input
-        v-model="msgTxt"
-        id="txt"
-        @input="userStartTyping"
-        @keyup="userStopTyping"
-        autocomplete="off"
-      />
+      <input v-model="msgTxt" id="txt" @input="userStartTyping" autocomplete="off" />
       <button>Send</button>
     </form>
   </section>
@@ -24,11 +18,12 @@ import userService from "../services/user-service.js";
 
 import io from "socket.io-client";
 
-const socket = io("http://localhost:3000");
-
+const socket = io();
+// "http://localhost:3000"
 export default {
   props: ["currToy"],
   created() {
+    var timeOut = false;
     this.currUser = userService.getLoggedinUser();
     socket.on("chat history", msgs => {
       this.messages = msgs;
@@ -37,7 +32,11 @@ export default {
       this.messages.push(msg);
     });
     socket.on("chat userTyping", msg => {
+      if (timeOut) clearTimeout(timeOut);
       this.msgUserTyping = msg;
+      timeOut = setTimeout(() => {
+        this.msgUserTyping = "";
+      }, 2500);
     });
     const toyId = this.$route.params.id;
     socket.emit("chat join", toyId, this.currUser[0].userName);
@@ -57,7 +56,7 @@ export default {
   },
   methods: {
     sendMsg() {
-      const msg = { txt: this.currUser[0].userName+": " + this.msgTxt };
+      const msg = { txt: this.currUser[0].userName + ": " + this.msgTxt };
       const toyId = this.$route.params.id;
       socket.emit("chat msg", msg, toyId);
       this.msgTxt = "";
@@ -67,14 +66,18 @@ export default {
       //     socket.emit("userTyping", this.$route.params.id);
       //   }, 2000);
       //   this.msgUserTyping = "user is typing..."
-      socket.emit("userTyping", this.$route.params.id,this.currUser[0].userName);
-    },
-    userStopTyping() {
-      setTimeout(() => {
-        this.msgUserTyping = "";
-      }, 2500);
-      // this.msgUserTyping = "";
+      socket.emit(
+        "userTyping",
+        this.$route.params.id,
+        this.currUser[0].userName
+      );
     }
+    // userStopTyping() {
+    //   // setTimeout(() => {
+    //   //   this.msgUserTyping = "";
+    //   // }, 2500);
+    //   // // this.msgUserTyping = "";
+    // }
   }
 };
 </script>

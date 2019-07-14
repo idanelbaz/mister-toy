@@ -64,7 +64,7 @@ function logOut() {
 function _getUrl(id = '') {
 
     return (process.env.NODE_ENV !== 'development') ?
-        `/api/toy/${id}` :
+        `/api/user/${id}` :
         `//localhost:3000/api/user/${id}`
 
 }
